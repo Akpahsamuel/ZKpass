@@ -9,7 +9,7 @@ export default function Home() {
 
   const verify = async () => {
     try {
-      const appid = "55274c84-4ce2-4a90-8b77-2c9d1956ed3b"; // Your TransGate project app ID
+      const appid = "d0324dbb56d24f15bdef0f7dfee108c2"; // Your TransGate project app ID
       const connector = new TransgateConnect(appid); // Initialize the TransGate connector
 
       // Check if TransGate is available
