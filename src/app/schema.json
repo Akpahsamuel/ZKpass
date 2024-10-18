@@ -1,0 +1,35 @@
+{
+    "issuer": "STS",
+    "desc": "Verification to check if a student has collected his/her ID card",
+    "website": "https://sts.ug.edu.gh/services/welcome",
+    "APIs": [
+      {
+        "host": "sts.ug.edu.gh",
+        "intercept": {
+          "url": "services/checkforidcard",
+          "method": "GET"
+        },
+        "assert": [
+          {
+            "key": "check|has_picked",
+            "value": "1",
+            "operation": "="
+          },
+          {
+            "key": "check|status",
+            "value": "PICKED",
+            "operation": "="
+          }
+        ],
+        "nullifier": "check|student_id"
+      }
+    ],
+    "HRCondition": [
+      "Student has collected their ID card"
+    ],
+    "tips": {
+      "message": "Please log in to the student portal to verify if you have collected your ID card."
+    },
+    "category": "Educational",
+    "id": "0x25f27d0605d64a48af55eccb8de422c5"
+  }
