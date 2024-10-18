@@ -9,14 +9,14 @@ export default function Home() {
 
   const verify = async () => {
     try {
-      const appid = "d0324dbb56d24f15bdef0f7dfee108c2"; // Your TransGate project app ID
+      const appid = "55274c84-4ce2-4a90-8b77-2c9d1956ed3b"; // Your TransGate project app ID
       const connector = new TransgateConnect(appid); // Initialize the TransGate connector
 
       // Check if TransGate is available
       const isAvailable = await connector.isTransgateAvailable();
 
       if (isAvailable) {
-        const schemaId = "25f27d0605d64a48af55eccb8de422c5"; // Your schema ID
+        const schemaId = "d0324dbb56d24f15bdef0f7dfee108c2"; // Your schema ID
 
         // Launch the verification process using the schema ID
         const res = await connector.launch(schemaId);
