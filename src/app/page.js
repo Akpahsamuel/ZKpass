@@ -2,36 +2,35 @@
 
 import styles from './styles/Home.module.css';
 import { useState } from 'react';
-import TransgateConnect from '@zkpass/transgate-js-sdk';  // Import the installed TransGate SDK
+import TransgateConnect from '@zkpass/transgate-js-sdk';
 
 export default function Home() {
   const [statusMessage, setStatusMessage] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
 
   const verify = async () => {
+    setIsVerifying(true);
     try {
-      const appid = "55274c84-4ce2-4a90-8b77-2c9d1956ed3b"; // Your TransGate project app ID
-      const connector = new TransgateConnect(appid); // Initialize the TransGate connector
+      const appid = "55274c84-4ce2-4a90-8b77-2c9d1956ed3b";
+      const connector = new TransgateConnect(appid);
 
-      // Check if TransGate is available
       const isAvailable = await connector.isTransgateAvailable();
 
       if (isAvailable) {
-        const schemaId = "d0324dbb56d24f15bdef0f7dfee108c2"; // Your schema ID
+        const schemaId = "d0324dbb56d24f15bdef0f7dfee108c2";
 
-        // Launch the verification process using the schema ID
         const res = await connector.launch(schemaId);
-        setStatusMessage('Verification successful!');  // Display success message
-        
-        // Here, you can add the logic to handle on-chain/off-chain verification
+        setStatusMessage('Verification successful!');
         console.log('Verification result:', res);
       } else {
         setStatusMessage('Please install the TransGate extension from the Chrome Web Store.');
-        // Open the Chrome Web Store link in a new tab
         window.open('https://chromewebstore.google.com/detail/zkpass-transgate/afkoofjocpbclhnldmmaphappihehpma?pli=1', '_blank');
       }
     } catch (error) {
-      console.log('TransGate verification error:', error); // Print the error to console
+      console.log('TransGate verification error:', error);
       setStatusMessage('Verification failed. Please try again.');
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -42,7 +41,15 @@ export default function Home() {
         <p className={styles.description}>
           Click the button below to check if you have collected your ID card.
         </p>
-        <button className={styles.button} onClick={verify}>Check Status</button>
+        <button
+          className={styles.button}
+          onClick={verify}
+          disabled={isVerifying}
+          aria-busy={isVerifying}
+        >
+          {isVerifying && <span className={styles.spinner} aria-hidden="true" />}
+          {isVerifying ? 'Verifying...' : 'Check Status'}
+        </button>
         <div id="statusMessage" className={styles.statusMessage}>{statusMessage}</div>
       </div>
     </div>
