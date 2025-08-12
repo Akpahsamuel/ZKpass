@@ -36,6 +36,12 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.backgroundGrid}>
+        <div className={styles.bgCell} />
+        <div className={styles.bgCell} />
+        <div className={styles.bgCell} />
+        <div className={styles.bgCell} />
+      </div>
       <div className={styles.card}>
         <h1 className={styles.title}>University ID Card Status</h1>
         <p className={styles.description}>
