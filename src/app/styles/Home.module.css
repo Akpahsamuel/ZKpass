@@ -1,103 +1,154 @@
-.container {
+.page {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
+}
+
+/* Left: brand panel */
+
+.brandPanel {
   position: relative;
-  padding: 24px;
+  flex: 1 1 45%;
+  min-height: 320px;
+  display: flex;
+  align-items: flex-end;
   overflow: hidden;
 }
 
-.backgroundGrid {
+.brandImage {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0;
-}
-
-.bgCell {
   background-image: url('/ugimg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.container::before {
-  content: "";
+.brandOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    1200px 800px at 50% 20%,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.55)
+  background: linear-gradient(
+    180deg,
+    rgba(9, 23, 46, 0.35) 0%,
+    rgba(9, 23, 46, 0.55) 55%,
+    rgba(9, 23, 46, 0.92) 100%
   );
-  pointer-events: none;
 }
 
-.card {
+.brandContent {
   position: relative;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 16px;
-  padding: 32px;
+  padding: 48px 40px;
+  color: #ffffff;
+  max-width: 480px;
+}
+
+.brandBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #d4af37;
+  color: #09172e;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+}
+
+.brandTitle {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.brandTagline {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+/* Right: form panel */
+
+.formPanel {
+  flex: 1 1 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f8fa;
+  padding: 40px 24px;
+}
+
+.formContent {
   width: 100%;
-  max-width: 520px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(8px);
+  max-width: 400px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8860b;
+  margin-bottom: 12px;
 }
 
 .title {
-  font-size: 2.125rem;
+  font-size: 2rem;
   line-height: 1.2;
-  color: #ffffff;
+  color: #0b1f3a;
   margin: 0 0 12px 0;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  font-weight: 700;
 }
 
 .description {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 24px;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #5b6472;
+  margin: 0 0 28px 0;
 }
 
 .button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  width: 100%;
+  background: #0b2f5c;
   color: #fff;
   padding: 14px 24px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+  transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 8px 20px rgba(11, 47, 92, 0.25);
 }
 
-.button:hover {
+.button:hover:not([disabled]) {
+  background: #0d3a70;
   transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 12px 26px rgba(11, 47, 92, 0.32);
 }
 
-.button:active {
+.button:active:not([disabled]) {
   transform: translateY(0);
 }
 
 .button[disabled] {
   opacity: 0.7;
   cursor: not-allowed;
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
 }
 
 .spinner {
   display: inline-block;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.45);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-top-color: #ffffff;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -109,16 +160,53 @@
 
 .statusMessage {
   margin-top: 20px;
-  font-size: 0.95rem;
-  color: #ffffff;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  border: 1px solid transparent;
 }
 
-@media (max-width: 480px) {
-  .card {
-    padding: 24px;
+.statusMessage.idle {
+  display: none;
+}
+
+.statusMessage.info {
+  background: #eef2ff;
+  color: #3730a3;
+  border-color: #c7d2fe;
+}
+
+.statusMessage.success {
+  background: #ecfdf3;
+  color: #087443;
+  border-color: #a7e6c2;
+}
+
+.statusMessage.error {
+  background: #fef2f2;
+  color: #b42318;
+  border-color: #fecaca;
+}
+
+.poweredBy {
+  margin: 24px 0 0 0;
+  font-size: 0.8rem;
+  color: #9aa3af;
+}
+
+@media (max-width: 860px) {
+  .page {
+    flex-direction: column;
   }
 
-  .title {
-    font-size: 1.75rem;
+  .brandPanel {
+    flex: none;
+    min-height: 240px;
+  }
+
+  .formPanel {
+    flex: none;
+    padding: 40px 20px 56px;
   }
 }
